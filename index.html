@@ -24,7 +24,9 @@
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--fs);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 420px at 50% -140px,#F4E6E6,transparent 70%),var(--bg)}
+/* IMAGEM DE FUNDO: coloque um arquivo chamado fundo.jpg na mesma pasta do index.html.
+   Se o arquivo não existir, aparece um fundo delicado com tortinhas e flores. */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(250,247,245,.45),rgba(250,247,245,.6)),url(fundo.jpg) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Ctext x='10' y='45' font-size='30' opacity='.22'%3E%F0%9F%A5%A7%3C/text%3E%3Ctext x='62' y='95' font-size='22' opacity='.2'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E")}
 main{max-width:520px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top,0px)) 20px calc(36px + env(safe-area-inset-bottom,0px))}
 .i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .i.lg{width:24px;height:24px}.i.sm{width:16px;height:16px}
@@ -94,7 +96,7 @@ main{max-width:520px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top,0
 .seal{width:50px;height:50px;border-radius:50%;flex:none;display:inline-block;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.6),transparent 44%),var(--c);box-shadow:0 0 0 3px #fff,0 0 0 4px var(--bd),inset 0 -5px 9px rgba(35,23,21,.14)}
 .seal.sm{width:30px;height:30px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--bd),inset 0 -3px 6px rgba(35,23,21,.14)}
 .ph2{position:relative;width:66px;height:66px;border-radius:19px;flex:none;background:#F3EAE5}
-.ph2.s{width:52px;height:52px;border-radius:15px}
+.ph2.s{width:46px;height:46px;border-radius:14px}.ph2.big{width:88px;height:88px;border-radius:22px}.prev{display:flex;align-items:center;gap:14px;margin-top:12px}
 .pi{display:block;width:100%;height:100%;border-radius:inherit;overflow:hidden;border:1px solid var(--bd)}
 .pi img,.pi svg{width:100%;height:100%;object-fit:cover;display:block}
 .ph2 .seal{position:absolute;right:-5px;bottom:-5px;width:22px;height:22px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--bd),inset 0 -3px 5px rgba(35,23,21,.14)}
@@ -319,15 +321,16 @@ a.wa:hover{background:#15864A}a.wa:active{transform:scale(.97)}
 <div id="nlogin"><h2>Itens, Preços e Fotos</h2><label for="npw">Senha</label><input id="npw" type="password" inputmode="numeric" autocomplete="off"><div class="msg" id="mN"></div><div class="acts"><button class="btn g" id="cN">Voltar</button><button class="btn" id="okN">Entrar</button></div></div>
 <div id="npanel" style="display:none"><h2>Itens, Preços e Fotos</h2><div class="sm">Cada item tem os seus próprios valores. Nada vem fixo.</div>
 <div class="sec">Novo item</div>
-<label for="nn" style="margin-top:0">Nome do item</label><input id="nn" placeholder="Ex.: Morango com creme">
-<label for="nt">Tipo (define a foto)</label><input id="nt" list="dtp" placeholder="Ex.: Tortinhas, Bolos, Casadinhos" autocomplete="off">
+<label for="nt" style="margin-top:0">Tipo (define o desenho)</label><input id="nt" list="dtp" placeholder="Ex.: Tortinhas, Bolos, Casadinhos" autocomplete="off">
 <datalist id="dtp"></datalist>
-<label>Cor do recheio</label><div class="sw" id="sw"></div><input id="nc" type="color" value="#ffb6c8" style="height:50px">
+<label for="nn">Nome do item</label><input id="nn" placeholder="Ex.: Morango com creme">
+<div class="prev"><span class="ph2 big" id="nprev"><span class="pi"></span></span><div class="sm">O desenho muda conforme o tipo e o sabor que você digita.</div></div>
+<label>Cor do recheio (opcional)</label><div class="sw" id="sw"></div><input id="nc" type="color" value="#ffb6c8" style="height:50px">
 <div class="two"><div><label for="np1">1 unidade (R$)</label><input id="np1" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></div><div><label for="npn">2 ou mais, cada (R$)</label><input id="npn" type="number" inputmode="decimal" min="0" step="0.01" placeholder="opcional"></div></div>
 <div class="sm" style="margin-top:8px">Deixe "2 ou mais" em branco se o item não tiver promoção.</div>
 <div class="msg" id="mN2"></div><button class="btn wide" id="add" style="margin-top:14px"><svg class="i"><use href="#i-plus"/></svg>Adicionar item</button>
 <div class="sec">Itens cadastrados</div><div id="nl"></div><button class="btn wide" id="esv" style="margin-top:6px"><svg class="i"><use href="#i-check"/></svg>Salvar alterações</button>
-<div class="sec">Fotos por tipo</div><div class="sm" style="margin-bottom:10px">A foto vale para todos os itens do mesmo tipo (ex.: todas as tortinhas).</div><div class="panel" id="fotl"></div><input type="file" id="phin" accept="image/*" hidden>
+
 <div class="acts"><button class="btn g" id="cN2" style="grid-column:1/-1"><svg class="i"><use href="#i-back"/></svg>Voltar</button></div></div>
 </div></div>
 
@@ -387,24 +390,42 @@ try{if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").ca
 /* Itens: tipo, preços livres por item */
 const tkey=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim().replace(/s$/,"");
 function getM(k){const m=M[k]||{},c=custom.find(x=>x.id===k)||{},d=k==="chocolate"?{p1:prc.ch,pn:0}:{p1:prc.p1,pn:prc.pn};return{tipo:m.tipo||c.tipo||"Tortinhas",p1:m.p1!=null?m.p1:(c.p1!=null?c.p1:d.p1),pn:m.pn!=null?m.pn:(c.pn!=null?c.pn:d.pn)}}
-function calc(it){let qt=0,v=0;const g={},det={};
- for(const k in it){const q=it[k]||0;if(!q)continue;qt+=q;const m=getM(k);if(m.pn>0){const t=tkey(m.tipo);g[t]=(g[t]||0)+q}}
- for(const k in it){const q=it[k]||0;if(!q)continue;const m=getM(k),u=(m.pn>0&&g[tkey(m.tipo)]>=2)?m.pn:m.p1,s=q*u;v+=s;det[k]={q,v:r2(s)}}
- return{qt,val:r2(v),det,g}}
+function calc(it){let qt=0,v=0,gt=0;const det={};
+ for(const k in it){const q=it[k]||0;if(!q)continue;qt+=q;if(getM(k).pn>0)gt+=q}
+ for(const k in it){const q=it[k]||0;if(!q)continue;const m=getM(k),u=(m.pn>0&&gt>=2)?m.pn:m.p1,s=q*u;v+=s;det[k]={q,v:r2(s)}}
+ return{qt,val:r2(v),det,gt}}
 function groups(){const o=[],m={};F.forEach(([k,n])=>{const t=getM(k).tipo,g=tkey(t);if(!m[g]){m[g]={t,items:[]};o.push(m[g])}m[g].items.push([k,n])});return o}
 const byGroup=fn=>groups().map(g=>`<h3 class="grp">${esc(g.t)}</h3>`+g.items.map(fn).join("")).join("");
 const minDate=()=>{const d=new Date();d.setDate(d.getDate()+2);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 
-/* Visual: imagens por tipo */
-const ART={
- tart:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#FBF1EC"/><ellipse cx="32" cy="54" rx="20" ry="3" fill="#231715" opacity=".08"/><path d="M10 30h44l-4 21q-1 5-6 5H20q-5 0-6-5z" fill="#E4B068"/><path d="M13 38h38M15 46h34" stroke="#C98F4A" stroke-width="1.5" opacity=".6"/><ellipse cx="32" cy="30" rx="22" ry="8" fill="#F3C9D1"/><ellipse cx="32" cy="29" rx="14" ry="4" fill="#fff" opacity=".4"/><circle cx="32" cy="22" r="5" fill="#B84A62"/><path d="M32 17q2-4 5-4" stroke="#6B8E5A" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>',
- cake:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#FBF1EC"/><ellipse cx="32" cy="55" rx="23" ry="3" fill="#231715" opacity=".08"/><rect x="11" y="38" width="42" height="16" rx="4" fill="#C98F5C"/><rect x="11" y="31" width="42" height="7" fill="#FFF3EA"/><rect x="11" y="23" width="42" height="8" rx="3" fill="#C98F5C"/><path d="M11 23q4-7 10-4t11-3 11 3 10 4v3H11z" fill="#F3C9D1"/><circle cx="32" cy="15" r="4.5" fill="#B84A62"/><path d="M32 11q2-4 5-4" stroke="#6B8E5A" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>',
- casad:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#FBF1EC"/><ellipse cx="32" cy="55" rx="22" ry="3" fill="#231715" opacity=".08"/><path d="M10 42q0 12 22 12t22-12z" fill="#E4B068"/><path d="M9 37q23 9 46 0v6q-23 9-46 0z" fill="#5A2E1E"/><path d="M10 36q0-19 22-19t22 19q-22 7-44 0z" fill="#E4B068"/><path d="M18 27q4-6 12-7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".5"/><g fill="#B84A62"><circle cx="26" cy="29" r="1.3"/><circle cx="35" cy="25" r="1.3"/><circle cx="43" cy="30" r="1.3"/></g></svg>',
- gen:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#FBF1EC"/><ellipse cx="32" cy="55" rx="18" ry="3" fill="#231715" opacity=".08"/><path d="M16 34h32l-4 20H20z" fill="#B84A62"/><path d="M22 34l2 20M32 34v20M42 34l-2 20" stroke="#9C3A51" stroke-width="1.2" opacity=".6"/><path d="M14 34q-2-9 8-10 0-9 10-9t10 9q10 1 8 10z" fill="#F3C9D1"/><circle cx="32" cy="12" r="3.5" fill="#B84A62"/></svg>'};
-function defArt(t){const k=tkey(t);return k.includes("tortinh")?ART.tart:k.includes("bolo")?ART.cake:k.includes("casadinh")?ART.casad:ART.gen}
-function seal(k,c2){let c=({limao:"#ffe66d",maracuja:"#ffb02e",oreo:"#fff4e6",sensacao:"#6b3a2a",chocolate:"#4a2517"})[k]||(custom.find(x=>x.id===k)||{}).cor||"#ffc2d6";if(!/^#[0-9a-f]{3,8}$/i.test(c))c="#ffc2d6";return '<span class="seal '+(c2||"")+'" style="--c:'+c+'" aria-hidden="true"></span>'}
-function tImg(tipo){const f=FOTOS[tkey(tipo)];return /^data:image\//.test(f||"")?'<img src="'+f+'" alt="" loading="lazy">':defArt(tipo)}
-const thumb=k=>'<span class="ph2"><span class="pi">'+tImg(getM(k).tipo)+'</span>'+seal(k)+'</span>';
+/* Visual: desenho de acordo com o sabor */
+const nrm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+let ncT=false;
+const TOP={
+ lemon:'<circle r="8" fill="#FFF8B0" stroke="#7AC74F" stroke-width="2"/><path d="M0-8V8M-8 0H8M-5.6-5.6L5.6 5.6M5.6-5.6L-5.6 5.6" stroke="#FFE66D" stroke-width="1.2"/><path d="M8-6q7-6 11-1-5 5-11 1z" fill="#7AC74F"/>',
+ passion:'<circle r="8" fill="#7A4AA0"/><circle r="5.5" fill="#FFD54A"/><circle cx="-2" cy="-1" r="1" fill="#6B3A2A"/><circle cx="2" cy="1.5" r="1" fill="#6B3A2A"/><circle cx="0" cy="-3" r=".9" fill="#6B3A2A"/>',
+ oreo:'<circle r="8" fill="#3A2A2A"/><circle r="5" fill="#FFF4E6"/><circle r="8" fill="none" stroke="#5A4646" stroke-width=".8"/>',
+ straw:'<path d="M0-7c7 0 10 5 9 10-2 6-7 7-9 8-2-1-7-2-9-8-1-5 2-10 9-10z" fill="#FF3D5A"/><path d="M-5-8q5-5 10 0q-5 2-10 0z" fill="#5CB85C"/><circle cx="-3" cy="0" r=".9" fill="#FFD9E0"/><circle cx="3" cy="3" r=".9" fill="#FFD9E0"/><circle cx="0" cy="6" r=".9" fill="#FFD9E0"/>',
+ choco:'<g transform="rotate(-8)"><rect x="-8" y="-6" width="16" height="12" rx="2.5" fill="#7A4A2E"/><path d="M-3-6v12M3-6v12M-8 0h16" stroke="#4A2517" stroke-width="1"/></g>',
+ sprinkle:'<g stroke-width="2" stroke-linecap="round"><path d="M-7-2l3 1" stroke="#fff"/><path d="M-1-6l2 2" stroke="#FFB02E"/><path d="M4-1l3-1" stroke="#fff"/><path d="M-4 4l3 1" stroke="#E8566E"/><path d="M3 5l2-2" stroke="#8FE3C8"/></g>',
+ coconut:'<g fill="#fff" stroke="#E0D6CF" stroke-width=".8"><circle cx="-4" cy="-2" r="3"/><circle cx="3" cy="-3" r="3"/><circle cx="0" cy="3" r="3.2"/></g>',
+ caramel:'<path d="M-8 0q4-8 8 0t8 0q-2 7-8 7t-8-7z" fill="#C98F4A"/>',
+ bean:'<g transform="rotate(-25)"><ellipse rx="5" ry="7" fill="#4A2517"/><path d="M-1-6q3 6-1 12" stroke="#E9C79A" stroke-width="1.2" fill="none"/></g>',
+ pine:'<circle r="7" fill="#FFD54A"/><circle r="3" fill="#FFF2A8"/><path d="M0-7l-3-5M0-7l3-5M0-7v-6" stroke="#5CB85C" stroke-width="2" stroke-linecap="round"/>',
+ grape:'<circle cx="-3" cy="0" r="3.6" fill="#7A4AA0"/><circle cx="3" cy="0" r="3.6" fill="#8D5BB5"/><circle cy="4" r="3.6" fill="#7A4AA0"/><path d="M0-4q2-4 5-4" stroke="#5CB85C" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+ cherry:'<circle r="5" fill="#B84A62"/><path d="M0-5q2-4 5-4" stroke="#6B8E5A" stroke-width="1.5" fill="none" stroke-linecap="round"/>'};
+const FLV=[["limao","lemon","#FFE66D"],["maracuj","passion","#FFB02E"],["oreo","oreo","#F4EBDD"],["sensac","straw","#6B3A2A"],["morang","straw","#F4A0AE"],["brigadeir","sprinkle","#5A2E1E"],["abacaxi","pine","#FFE27A"],["uva","grape","#9B6BC4"],["cafe","bean","#8B5A3C"],["chocolate","choco","#4A2517"],["choco","choco","#4A2517"],["nutella","choco","#6B3A2A"],["coco","coconut","#F6F1EA"],["beijinho","coconut","#F6F1EA"],["ninho","caramel","#F3E3C3"],["leite","caramel","#E6B873"],["caramel","caramel","#D9A15B"]];
+function flavOf(n){const s=nrm(n);for(const [w,t,c] of FLV)if(s.includes(w))return{top:t,fill:c};return{top:"cherry",fill:"#F3C9D1"}}
+function art(nome,tipo,cor){
+ const f=flavOf(nome),fill=/^#[0-9a-f]{3,8}$/i.test(cor||"")?cor:f.fill,top=TOP[f.top],t=nrm(tipo);
+ const g=(x,y,k)=>'<g transform="translate('+x+' '+y+') scale('+k+')">'+top+'</g>';
+ const bg='<rect width="64" height="64" fill="#FBF1EC"/>';
+ if(t.includes("bolo"))return '<svg viewBox="0 0 64 64">'+bg+'<ellipse cx="32" cy="55" rx="23" ry="3" fill="#231715" opacity=".08"/><rect x="11" y="38" width="42" height="16" rx="4" fill="#C98F5C"/><rect x="11" y="31" width="42" height="7" fill="#FFF3EA"/><rect x="11" y="23" width="42" height="8" rx="3" fill="#C98F5C"/><path d="M11 23q4-7 10-4t11-3 11 3 10 4v3H11z" fill="'+fill+'"/>'+g(32,13,.8)+'</svg>';
+ if(t.includes("casadinh"))return '<svg viewBox="0 0 64 64">'+bg+'<ellipse cx="32" cy="55" rx="22" ry="3" fill="#231715" opacity=".08"/><path d="M10 42q0 12 22 12t22-12z" fill="#E4B068"/><path d="M9 37q23 9 46 0v6q-23 9-46 0z" fill="'+fill+'"/><path d="M10 36q0-19 22-19t22 19q-22 7-44 0z" fill="#E4B068"/>'+g(32,26,.7)+'</svg>';
+ if(t.includes("tort"))return '<svg viewBox="0 0 64 64">'+bg+'<ellipse cx="32" cy="54" rx="20" ry="3" fill="#231715" opacity=".08"/><path d="M10 30h44l-4 21q-1 5-6 5H20q-5 0-6-5z" fill="#E4B068"/><path d="M13 38h38M15 46h34" stroke="#C98F4A" stroke-width="1.5" opacity=".6"/><ellipse cx="32" cy="30" rx="22" ry="8" fill="'+fill+'"/><ellipse cx="32" cy="28" rx="14" ry="3.5" fill="#fff" opacity=".28"/>'+g(32,23,.85)+'</svg>';
+ return '<svg viewBox="0 0 64 64">'+bg+'<ellipse cx="32" cy="55" rx="18" ry="3" fill="#231715" opacity=".08"/><path d="M16 34h32l-4 20H20z" fill="#B84A62"/><path d="M22 34l2 20M32 34v20M42 34l-2 20" stroke="#9C3A51" stroke-width="1.2" opacity=".6"/><path d="M14 34q-2-9 8-10 0-9 10-9t10 9q10 1 8 10z" fill="'+fill+'"/>'+g(32,18,.7)+'</svg>'}
+const thumb=(k,s)=>{const m=getM(k),c=custom.find(x=>x.id===k);return '<span class="ph2'+(s?" s":"")+'"><span class="pi">'+art(nameOf(k),m.tipo,c&&c.cor)+'</span></span>'};
+function prevN(){const e=$("nprev");if(e)e.firstChild.innerHTML=art($("nn").value||"",$("nt").value||"Tortinhas",ncT?$("nc").value:null)}
 const stTxt=s=>s<1?'<span class="st z">Sob encomenda</span>':'<span class="st"><i class="dot"></i>Disponível · '+s+'</span>';
 const priceTag=k=>{const m=getM(k);return{m:m.p1>0?R(m.p1):"A definir",s:m.pn>0?"2 ou mais: "+R(m.pn)+" cada":"sem promoção"}};
 const stepper=(attr,k,q,max)=>`<div class="q"><button class="qb" ${attr}="${k}" data-d="-1" aria-label="Diminuir" ${q<1?"disabled":""}>${I("minus")}</button><b>${q}</b><button class="qb" ${attr}="${k}" data-d="1" aria-label="Aumentar" ${max!=null&&q>=max?"disabled":""}>${I("plus")}</button></div>`;
@@ -414,11 +435,11 @@ function render(){
   return `<article class="item">${thumb(k)}<div class="info"><h3 class="nm">${esc(n)}</h3>${stTxt(s)}<div class="pr"><b>${p.m}</b><span>${p.s}</span></div></div><div class="rt">${stepper("data-k",k,q,s)}<button class="lnk" data-e="${k}">Encomendar</button></div></article>`});
  const tot=Object.values(cart).reduce((a,b)=>a+b,0);$("bp").disabled=!tot;
  {const src=kind==="encomenda"?ec:cart,c2=calc(src);$("resE").innerHTML=c2.qt?F.filter(([k])=>src[k]).map(([k,n])=>`<div class="srow"><span>${src[k]}× ${esc(n)}</span></div>`).join("")+`<div class="srow t"><span>Total</span><b>${R(c2.val)}</b></div>`:""}
- {const c=calc(cart);let hint="";for(const [k] of F){if(!(cart[k]>0))continue;const m=getM(k);if(m.pn>0&&c.g[tkey(m.tipo)]===1){hint="Leve 2 ou mais e pague "+R(m.pn)+" cada";break}}
+ {const c=calc(cart);let hint="";for(const [k] of F){if(!(cart[k]>0))continue;const m=getM(k);if(m.pn>0&&c.gt===1){hint="Leve 2 ou mais e pague "+R(m.pn)+" cada";break}}
   $("ptot").innerHTML=tot?`<span class="cnt">${tot} ${tot>1?"itens":"item"}</span><b class="amt">${R(c.val)}</b>`+(hint?`<span class="hint">${hint}</span>`:""):'<span class="cnt">Seu pedido</span><span class="hint" style="color:var(--mu);font-weight:500">Escolha os doces para ver o valor</span>'}
- $("ecl").innerHTML=kind==="encomenda"?'<div style="margin-top:6px">'+F.map(([k,n])=>`<div class="row"><span class="l">${seal(k,"sm")}${esc(n)}</span>${stepper("data-ek",k,ec[k]||0)}</div>`).join("")+"</div>":"";
+ $("ecl").innerHTML=kind==="encomenda"?'<div style="margin-top:6px">'+F.map(([k,n])=>`<div class="row"><span class="l">${thumb(k,1)}${esc(n)}</span>${stepper("data-ek",k,ec[k]||0)}</div>`).join("")+"</div>":"";
  const act=document.activeElement&&document.activeElement.id&&document.activeElement.id.startsWith("i_");
- if(!act)$("inps").innerHTML=F.map(([k,n])=>`<div class="strow">${seal(k,"sm")}<div class="tx"><b>${esc(n)}</b><small>${esc(getM(k).tipo)} · Atual: ${stock[k]||0}</small></div><input type="number" min="0" inputmode="numeric" id="i_${k}" value="${stock[k]||0}" aria-label="Estoque de ${esc(n)}"></div>`).join("");
+ if(!act)$("inps").innerHTML=F.map(([k,n])=>`<div class="strow">${thumb(k,1)}<div class="tx"><b>${esc(n)}</b><small>${esc(getM(k).tipo)} · Atual: ${stock[k]||0}</small></div><input type="number" min="0" inputmode="numeric" id="i_${k}" value="${stock[k]||0}" aria-label="Estoque de ${esc(n)}"></div>`).join("");
  $("ords").innerHTML=orders.slice(0,15).map(o=>`<div class="ord"><div class="oh">${I(o.tipo==="encomenda"?"cal":"bag","sm")}<span>${o.tipo==="encomenda"?"Encomenda":"Pedido"}</span> · <b>${esc(o.nome||"—")}</b>${o.data?" · "+br(o.data):""}</div>${F.filter(([k])=>o.itens[k]).map(([k,n])=>o.itens[k]+"× "+esc(n)).join(", ")}${o.valor?' · <span class="v">'+R(o.valor)+"</span>":""}${o.tel?'<div><button class="btn g xs" style="margin-top:10px" data-oid="'+o.id+'">'+I("receipt","sm")+'Ver pedido e confirmar</button></div>':""}</div>`).join("")||'<div class="sm">Nenhum pedido ainda.</div>';
  $("mode").textContent=mode==="db"?"Estoque sincronizado":"Modo local (neste aparelho)";
  if($("fpanel").style.display!=="none")calcFin();
@@ -502,23 +523,16 @@ $("okP").onclick=()=>{if($("pw").value===PW){$("login").style.display="none";$("
 $("sv").onclick=async()=>{const st={};F.forEach(([k])=>st[k]=Math.max(0,parseInt($("i_"+k).value)||0));
  await saveStock(st);cart={};backA("ovV");render();note("Estoque salvo e atualizado em todo o app.",true)};
 async function saveCustom(){setF();LS.set("t_custom",custom);LS.set("t_removed",removed);LS.set("t_prc",prc);LS.set("t_meta",M);let r="local";if(mode==="db"){try{await db.doc("config/sabores").set({lista:custom,removidos:removed,precos:prc,meta:M,zero:1});r="db"}catch(e){r="fail"}}render();return r}
-async function saveFotos(){LS.set("t_fotos",FOTOS);let r="local";if(mode==="db"){try{await db.doc("config/tipos").set({fotos:FOTOS});r="db"}catch(e){r="fail"}}return r}
 const SV={db:"Salvo e sincronizado.",local:"Salvo só neste aparelho.",fail:"Salvo só neste aparelho (sem permissão para sincronizar)."};
 function distinctTypes(){const o=[],s={};F.forEach(([k])=>{const t=getM(k).tipo,g=tkey(t);if(!s[g]){s[g]=1;o.push({g,t})}});return o}
 function listN(){
- $("nl").innerHTML=F.map(([id,nome])=>{const m=getM(id);return `<div class="erow"><div class="eh">${seal(id,"sm")}<b>${esc(nome)}</b>${ask===id?'<button class="btn danger xs" data-r="'+id+'">Excluir?</button>':'<button class="ib" data-r="'+id+'" aria-label="Excluir item">'+I("trash")+'</button>'}</div><label for="e_t_${id}">Tipo</label><input id="e_t_${id}" list="dtp" value="${esc(m.tipo)}" autocomplete="off"><div class="two"><div><label for="e_1_${id}">1 unidade (R$)</label><input id="e_1_${id}" type="number" inputmode="decimal" min="0" step="0.01" value="${m.p1||""}"></div><div><label for="e_n_${id}">2 ou mais, cada (R$)</label><input id="e_n_${id}" type="number" inputmode="decimal" min="0" step="0.01" value="${m.pn||""}" placeholder="sem promoção"></div></div></div>`}).join("")+(removed.length?'<button class="btn g xs wide" id="rst" style="margin-top:4px">'+I("undo","sm")+'Restaurar itens originais</button>':"")||'<div class="sm">Nenhum item cadastrado.</div>';
- listP();dl()}
+ $("nl").innerHTML=F.map(([id,nome])=>{const m=getM(id);return `<div class="erow"><div class="eh">${thumb(id,1)}<b>${esc(nome)}</b>${ask===id?'<button class="btn danger xs" data-r="'+id+'">Excluir?</button>':'<button class="ib" data-r="'+id+'" aria-label="Excluir item">'+I("trash")+'</button>'}</div><label for="e_t_${id}">Tipo</label><input id="e_t_${id}" list="dtp" value="${esc(m.tipo)}" autocomplete="off"><div class="two"><div><label for="e_1_${id}">1 unidade (R$)</label><input id="e_1_${id}" type="number" inputmode="decimal" min="0" step="0.01" value="${m.p1||""}"></div><div><label for="e_n_${id}">2 ou mais, cada (R$)</label><input id="e_n_${id}" type="number" inputmode="decimal" min="0" step="0.01" value="${m.pn||""}" placeholder="sem promoção"></div></div></div>`}).join("")+(removed.length?'<button class="btn g xs wide" id="rst" style="margin-top:4px">'+I("undo","sm")+'Restaurar itens originais</button>':"")||'<div class="sm">Nenhum item cadastrado.</div>';
+ dl()}
 function dl(){const s=new Set(["Tortinhas","Bolos","Casadinhos"]);F.forEach(([k])=>s.add(getM(k).tipo));$("dtp").innerHTML=[...s].map(t=>'<option value="'+esc(t)+'">').join("")}
-function listP(){$("fotl").innerHTML=distinctTypes().map(({g,t})=>`<div class="strow"><span class="ph2 s"><span class="pi">${tImg(t)}</span></span><div class="tx"><b>${esc(t)}</b><small>${FOTOS[g]?"Foto enviada":"Ilustração padrão"}</small></div><button class="btn g xs" data-ph="${esc(g)}">${I("img","sm")}${FOTOS[g]?"Trocar":"Enviar foto"}</button>${FOTOS[g]?'<button class="ib" data-phx="'+esc(g)+'" aria-label="Remover foto">'+I("x","sm")+'</button>':""}</div>`).join("")||'<div class="sm" style="padding:12px 0">Cadastre um item para enviar fotos.</div>'}
-let phKey=null;
-$("fotl").onclick=async e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.ph){phKey=b.dataset.ph;$("phin").value="";$("phin").click();return}
- if(b.dataset.phx){delete FOTOS[b.dataset.phx];const r=await saveFotos();listP();render();toast("Foto removida. "+SV[r],"ok")}};
-function readPhoto(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{const S=360,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d");const m=Math.min(im.width,im.height),sx=(im.width-m)/2,sy=(im.height-m)/2;x.fillStyle="#fff";x.fillRect(0,0,S,S);x.drawImage(im,sx,sy,m,m,0,0,S,S);res(c.toDataURL("image/jpeg",.8))};im.src=r.result};r.readAsDataURL(file)})}
-$("phin").onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f||!phKey)return;try{FOTOS[phKey]=await readPhoto(f)}catch(x){toast("Não consegui ler essa imagem.","err");return}const r=await saveFotos();listP();render();toast("Foto salva. "+SV[r],r==="fail"?"err":"ok")};
 const SWC=["#ffb6c8","#e85d75","#ffb02e","#ffe66d","#c9f2e3","#8fd3b6","#b79ced","#fff4e6","#7a4a2e","#4a2517"];
-function paintSw(){const cur=$("nc").value.toLowerCase();$("sw").innerHTML=SWC.map(c=>`<button type="button" style="--c:${c}" data-c="${c}" class="${c===cur?"on":""}" aria-label="Cor ${c}"></button>`).join("")}
-$("sw").onclick=e=>{const b=e.target.closest("button");if(!b)return;$("nc").value=b.dataset.c;paintSw()};$("nc").addEventListener("input",paintSw);
-function openNP(){$("nlogin").style.display="none";$("npanel").style.display="";$("mN2").textContent="";paintSw();listN()}
+function paintSw(){const cur=ncT?$("nc").value.toLowerCase():"";$("sw").innerHTML=SWC.map(c=>`<button type="button" style="--c:${c}" data-c="${c}" class="${c===cur?"on":""}" aria-label="Cor ${c}"></button>`).join("")}
+$("sw").onclick=e=>{const b=e.target.closest("button");if(!b)return;$("nc").value=b.dataset.c;ncT=true;paintSw();prevN()};$("nc").addEventListener("input",()=>{ncT=true;paintSw();prevN()});$("nn").addEventListener("input",prevN);$("nt").addEventListener("input",prevN);
+function openNP(){$("nlogin").style.display="none";$("npanel").style.display="";$("mN2").textContent="";paintSw();prevN();listN()}
 $("bn").onclick=()=>{openNP();$("ovN").classList.add("on")};
 $("cN").onclick=$("cN2").onclick=()=>backA("ovN");
 $("okN").onclick=()=>{if($("npw").value===PW)openNP();else $("mN").textContent="Senha incorreta."};
@@ -526,7 +540,7 @@ $("add").onclick=async()=>{const n=$("nn").value.replace(/[<>&]/g,"").trim(),t=$
  if(!n){$("mN2").textContent="Digite o nome do item.";return}
  /* preço livre: pode ficar em branco */
  if(F.some(([,x])=>x.toLowerCase()===n.toLowerCase())){$("mN2").textContent="Esse item já existe.";return}
- $("mN2").textContent="";const nid="c"+Date.now();custom.push({id:nid,nome:n,cor:$("nc").value});M[nid]={tipo:t,p1,pn};const r=await saveCustom();$("nn").value="";$("np1").value="";$("npn").value="";listN();toast("Item cadastrado. "+SV[r],r==="fail"?"err":"ok")};
+ $("mN2").textContent="";const nid="c"+Date.now();custom.push({id:nid,nome:n,cor:ncT?$("nc").value:""});M[nid]={tipo:t,p1,pn};const r=await saveCustom();$("nn").value="";$("nt").value="";$("np1").value="";$("npn").value="";ncT=false;paintSw();prevN();listN();toast("Item cadastrado. "+SV[r],r==="fail"?"err":"ok")};
 $("esv").onclick=async()=>{
  $("mN2").textContent="";F.forEach(([k])=>{M[k]={tipo:$("e_t_"+k).value.replace(/[<>&]/g,"").trim()||"Tortinhas",p1:num($("e_1_"+k).value),pn:num($("e_n_"+k).value)}});
  const r=await saveCustom();listN();toast("Itens e preços salvos. "+SV[r],r==="fail"?"err":"ok")};
@@ -572,7 +586,6 @@ $("zok").onclick=async()=>{$("ovZ").classList.remove("on");const s=finVals();fin
  try{const c=fbInit();if(c){db=c;mode="db";
   db.doc("estoque/atual").onSnapshot(s=>{if(s.exists)stock={...stock,...s.data()};render()});
   db.doc("config/sabores").onSnapshot(s=>{if(s.exists){const d=s.data();custom=d.lista||[];removed=d.removidos||[];if(d.meta)M=d.meta;let z=false;if(d.zero!==1){Object.keys(M).forEach(k=>{M[k]={...M[k],p1:0,pn:0}});z=true}setF();render();if(z)saveCustom()}else if(custom.length||removed.length||Object.keys(M).length){saveCustom()}});
-  db.doc("config/tipos").onSnapshot(s=>{if(s.exists){FOTOS=s.data().fotos||{};render();if($("npanel").style.display!=="none")listP()}});
   db.doc("config/financeiro").onSnapshot(s=>{if(s.exists){fin={total:0,custos:[],hist:[],...s.data()}}});
   render()}}catch(e){}
 })();
